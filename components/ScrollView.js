@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, FlatList,StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 import SoundElement from "./SoundElement";
 import soundsList from "../assets/sounds/soundsList";
 
@@ -21,24 +21,22 @@ export default class ScrollView extends React.Component {
     this.setState({ sounds: soundsList });
   }
 
-  render() { 
+  render() {
     return (
       <FlatList
-      style = {style.list}
+        style={style.list}
         data={this.state.sounds}
         keyExtractor={this._keyExtractor}
         renderItem={this._renderItem}
         horizontal={false}
-        numColumns = {3}
-        // columnWrapperStyle = {style.columnWrapper}
+        numColumns={3}
       />
     );
   }
-
 }
 const style = StyleSheet.create({
-    list : {
-        flex: 1,
-        width: "100%"
-    }
-})
+  list: {
+    flex: 1,
+    width: "100%"
+  }
+});
