@@ -1,8 +1,7 @@
 import React from "react";
 import { Text, FlatList,StyleSheet } from "react-native";
 import SoundElement from "./SoundElement";
-
-const soundsList = require("../assets/sounds/soundsList.json");
+import soundsList from "../assets/sounds/soundsList";
 
 export default class ScrollView extends React.Component {
   constructor(props) {
@@ -20,7 +19,6 @@ export default class ScrollView extends React.Component {
 
   componentWillMount() {
     this.setState({ sounds: soundsList });
-    // console.log(soundsList);
   }
 
   render() { 

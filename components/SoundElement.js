@@ -1,34 +1,67 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Audio } from "expo-av";
+// import Audio from 'expo';
 
 // const soundObject = new Audio.Sound();
 
 export default class SoundElement extends React.Component {
   constructor(props) {
     super(props);
+    // this.state = {
+    //   sound: {}
+    // };
+    // let soundResource = new Audio.Sound();
+    // let soundSource = this.props.link;
+    // const soundResource = Audio.Sound({
+    //   source: soundSource
+    // });
+
+    // soundResource.loadAsync();
+    // this.state = {
+    //   sound: soundResource
+    // };
   }
 
-  play = sound => {
-    Audio.Sound.createAsync(
-      sound,
-      (initialStatus = {}),
-      (onPlaybackStatusUpdate = null),
-      (downloadFirst = true)
-    );
-  };
+    async play() {
+        console.log('culo')
+    let soundResource = new Audio.Sound();
+    try {
+      await soundResource.loadAsync(this.props.link);
+      await soundResource.setPositionAsync(0);
+      await soundResource.playAsync();
+    } catch(error) {
+      console.log('errore on play')
+      console.log(error)
+    }
+  }
+
+  async componentDidMount() {
+    // const soundResource = new Audio.Sound.createAsync(
+    //     soundSource,
+    //   (initialStatus = {}),
+    //   (onPlaybackStatusUpdate = null),
+    //   (downloadFirst = true)
+    // );
+    // let soundResource = new Audio.Sound();
+    // try {
+    //   await soundResource.loadAsync(this.props.link);
+    //   // await soundObject.playAsync();
+    //   // Your sound is playing!
+    // } catch (error) {
+    //   // An error occurred!
+    //   console.log('errore on mount')
+    // }
+    // this.setState({
+    //   sound: soundResource
+    // });
+  }
 
   render() {
-      console.log(this.props.title)
     return (
-        <TouchableOpacity
-          style={style.button}
-            onPress = {
-                this.play(this.props.link)
-            }
-        >
-          <Text style={style.buttonText}> {this.props.title} </Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={style.button} onPress={() => this.play()}>
+        <Text style={style.buttonText}> {this.props.title} </Text>
+      </TouchableOpacity>
     );
   }
 }
