@@ -5,16 +5,30 @@ import { Audio } from "expo-av";
 export default class SoundElement extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+        sound: {}
+    }
   }
 
   async play() {
-    let soundResource = new Audio.Sound();
     try {
-      await soundResource.loadAsync(this.props.link);
-      await soundResource.setPositionAsync(0);
-      await soundResource.playAsync();
+      await this.state.sound.setPositionAsync(0);
+      await this.state.sound.playAsync();      
     } catch (error) {
       console.log("errore on play");
+      console.log(error);
+    }
+  }
+
+  async componentDidMount(){
+    const soundResource = new Audio.Sound();
+    try{
+        await soundResource.loadAsync(this.props.link);
+        this.setState({
+            sound:soundResource
+        })
+    }catch (error) {
+      console.log("errore on didMount");
       console.log(error);
     }
   }
