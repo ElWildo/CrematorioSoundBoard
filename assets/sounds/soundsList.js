@@ -138,3 +138,5 @@ const soundsList = [{
     name: "volontariato",
     link: require("./volontariato.mp3")
 }]
+
+export default soundsList;
